@@ -58,8 +58,7 @@ execution_config=ExecutionConfig(
             # Cosmos creates a new Python virtualenv for each dbt task being executed
         )
 operator_args={
-            "py_system_site_packages": True,
-            "py_requirements": ["dbt-core","dbt-trino"],
+            "vars": '{"logical_date": "{{ ds }}" }',
             # "install_deps": True,
             # "emit_datasets": False, 
               # Example of how to not set inlets and outlets
