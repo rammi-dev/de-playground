@@ -17,6 +17,8 @@ DBT_EXECUTABLE_PATH = f"{os.environ['AIRFLOW_HOME']}/venv/bin/run-dbt.sh"
 DBT_VENV_PATH = f"{os.environ['AIRFLOW_HOME']}/src/dbt-env"
 DBT_TARGET_PATH = "/opt/airflow/src/dbt-targets"
 
+
+
 render_config_bronze = RenderConfig(
     dbt_executable_path="DBT_EXECUTABLE_PATH", 
     select=["tag:terminal_kpi_bronze"],  # Only include models with the specific tag
