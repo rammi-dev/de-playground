@@ -17,8 +17,8 @@ DBT_EXECUTABLE_PATH = f"{os.environ['AIRFLOW_HOME']}/venv/bin/dbt"
 DBT_VENV_PATH = f"{os.environ['AIRFLOW_HOME']}/venv"
 
 dbt_env_vars = {
-    "TRINO_USER": Variable.get("trino_user", default_var="kmikolajczyk"),
-    "TRINO_PASSWD": Variable.get("trino_passwd", default_var="Begat-windward-rascal-common-chaperon"),
+    "TRINO_USER": Variable.get("trino_user", default_var="your-user"),
+    "TRINO_PASSWD": Variable.get("trino_passwd", default_var="your pass"),
     "TRINO_HOST": Variable.get("trino_host", default_var="trino.data.hub.flowbird.cloud"),
     "TRINO_PORT": Variable.get("trino_port", default_var="443"),
     "HIVE_CATALOG": Variable.get("hive_catalog", default_var="hive"),
@@ -145,6 +145,7 @@ with DAG(
     schedule_interval="@daily",
     start_date=datetime(2025, 1, 27),
     catchup=False,
+    tags=['cold-path']  # Add tags for grouping
 ) as dag:
 
     # Initial pre-check task

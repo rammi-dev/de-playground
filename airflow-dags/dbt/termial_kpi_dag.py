@@ -141,6 +141,7 @@ dbt_dag = DbtDag (
     start_date=datetime(2025, 1, 27),
     schedule_interval="@daily",
     catchup=False,
+    tags=['cold-path']  # Add tags for grouping
     # task_args={
     #    # Pass dynamic `--target-path`
     #    "extra_args": [
