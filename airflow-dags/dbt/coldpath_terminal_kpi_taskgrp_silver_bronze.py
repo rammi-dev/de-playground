@@ -22,7 +22,7 @@ coldpath_s3_endpoint = Variable.get("coldpath_s3_endpoint").strip('"')
 coldpath_source_root_dir = Variable.get("coldpath_root").strip('"')
 coldpath_hive_calalog = Variable.get("coldpath_hive_catalog")
 pkf_alarms_s3_path = Variable.get("pkf_alarms_s3_path").strip('"')
-sss_alarms_s3_path = Variable.get("sss_alarms_s3_path").strip('"')
+sss_poseventstatus_path = Variable.get("sss_poseventstatus_path").strip('"')
 
 dbt_env_vars = {
         "TRINO_USER": trino_conn_prms.login,
@@ -34,8 +34,7 @@ dbt_env_vars = {
         "HIVE_CATALOG": 'hive',
         "COLDPATH_ROOT ": coldpath_source_root_dir,
         "PKF_ALARMS_S3_PATH": f'{coldpath_s3_endpoint}/{pkf_alarms_s3_path}',
-        "SSS_ALARMS_S3_PATH": f'{coldpath_s3_endpoint}/{sss_alarms_s3_path}',
-
+        "SSS_POSEVENTSTATUS_PATH": f'{coldpath_s3_endpoint}/{sss_poseventstatus_path}',
     }
 
 execution_config=ExecutionConfig(

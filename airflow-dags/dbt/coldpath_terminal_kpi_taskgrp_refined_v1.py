@@ -22,7 +22,7 @@ trino_conn_prms = BaseHook.get_connection("trino_coldpath")
 coldpath_s3_endpoint = Variable.get("coldpath_s3_endpoint")
 coldpath_source_root_dir = Variable.get("coldpath_root").strip('"')
 pkf_alarms_s3_path = Variable.get("pkf_alarms_s3_path").strip('"')
-sss_alarms_s3_path = Variable.get("sss_alarms_s3_path").strip('"')
+sss_poseventstatus_path = Variable.get("sss_poseventstatus_path").strip('"')
 
  # trino_conn_prms.login,
 dbt_env_vars = {
@@ -35,7 +35,7 @@ dbt_env_vars = {
         "HIVE_CATALOG": 'hive',
         "COLDPATH_ROOT ": coldpath_source_root_dir,
         "PKF_ALARMS_S3_PATH": f'{coldpath_s3_endpoint}/{pkf_alarms_s3_path}',
-        "SSS_ALARMS_S3_PATH": f'{coldpath_s3_endpoint}/{sss_alarms_s3_path}',
+        "SSS_POSEVENTSTATUS_PATH": f'{coldpath_s3_endpoint}/{sss_poseventstatus_path}',
     }
 
 render_config_asset = RenderConfig(
@@ -74,7 +74,7 @@ def terminal_kpi_refined_dbt_dag():
     # logical date defined in {{ ts }} will be passed to DBT
     
     dbt_env_partition = {
-        "PROCESSING_DATETIME__asset": "{{ ds }}",
+        "PROCESSING_DATETIME__ASSET": "{{ ds }}",
     }
 
     vars = dbt_env_vars | dbt_env_partition
