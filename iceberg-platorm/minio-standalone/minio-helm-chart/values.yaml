@@ -1,0 +1,47 @@
+---
+minio:
+  enabled: true
+  # mode: "distributed"
+  namespaceOverride: minio
+  mode: "standalone"
+  extraEnvVars:
+  - name: MINIO_AUDIT_LOGGER_FS_ENABLE
+    value: "on"
+  - name: MINIO_AUDIT_LOGGER_FS_TARGET
+    value: "/bitnami/minio/logs/audit"
+  auth:
+    rootUser: admin
+    rootPassword: admin-password
+
+  persistence:
+    enabled: true
+    size: 2Gi
+  resources:
+    requests:
+      memory: 4Gi
+      cpu: 1
+    limits:
+      cpu: 4
+      memory: 4Gi
+  provisioning:
+    enabled: true
+    buckets:
+      - name: data-bucket-default
+    policies:
+      - name: data-bucket-default-full-access
+        statements:
+          - resources:
+              - "arn:aws:s3:::data-bucket-default/*"
+              - "arn:aws:s3:::data-bucket-default"
+            actions:
+              - "s3:*"
+            effect: "Allow"
+
+    users:
+      - username: data-bucket-default-full
+        password: password
+        disabled: false
+        setPolicies: true
+        policies:
+          - data-bucket-default-full-access
+

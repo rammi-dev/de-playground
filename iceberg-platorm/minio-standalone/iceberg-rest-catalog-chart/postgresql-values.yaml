@@ -1,0 +1,30 @@
+postgresql:
+  enabled: true
+  
+  auth:
+        username: iceber-rest-catalog-user
+        password: password
+        database: iceberg
+        postgresPassword: password
+        enablePostgresUser: true
+
+  architecture: standalone
+
+  replication:
+    enabled: false
+
+  primary:
+    persistence:
+      enabled: false
+
+
+  metrics:
+    enabled: false
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi

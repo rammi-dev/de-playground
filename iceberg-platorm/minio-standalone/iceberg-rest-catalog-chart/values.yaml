@@ -1,0 +1,47 @@
+---
+deployment:
+  replicas: 0
+image:
+  repository: iceberg-rest 
+  registry: tabulario
+  tag: 1.6.0
+  pullPolicy: IfNotPresent
+  pullSecrets:
+    - name: docker-registry-secret
+ingress:
+  enabled: false
+
+s3:
+  accessKey: data-bucket-default-full
+  secretKey: password 
+  region: us-east-1
+  endpoint: http://minio.minio.svc.cluster.local:9000
+env: local
+deployment:
+  serviceAccount: rest-catalog
+  replicas: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: 2000m
+      memory: 5Gi
+  nameOverride: ""
+service:
+  server:
+    port: 8080
+  jetty:
+    server:
+      port: 8181
+  spring:
+    profiles:
+      active: dev
+  management:
+    server:
+      port: 38081
+catalog:
+  warehouse: "s3://data-bucket-default/iceberg-rest-catalog/wh"
+  jdbc:
+    url: "jdbc:postgresql://iceberg-postgresql:5432/iceberg"
+

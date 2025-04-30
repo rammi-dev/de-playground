@@ -1,0 +1,9 @@
+dependencies:
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.6.6
+- name: trino
+  repository: https://trinodb.github.io/charts
+  version: 0.32.0
+digest: sha256:5e8302e5f5c3a2596637b0f69d0d6cd52c66395693f52eb98e533eefb1a6bf31
+generated: "2025-04-30T19:41:35.895882915+02:00"

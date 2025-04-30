@@ -1,0 +1,19 @@
+trino:
+  enabled: true
+  env:
+    - name: AWS_ACCESS_KEY_ID
+      value: data-bucket-default-full
+    - name: AWS_SECRET_ACCESS_KEY
+      value: password
+  catalogs:
+    iceberg: |-
+      connector.name=iceberg
+      iceberg.catalog.type=rest
+      iceberg.rest-catalog.uri=http://iceberg-rest-catalog.iceberg:8181
+      fs.native-s3.enabled=true
+      s3.region=us-east-1
+      s3.endpoint=http://minio.minio.svc.cluster.local:9000
+      s3.aws-access-key=${ENV:AWS_ACCESS_KEY_ID}
+      s3.aws-secret-key=${ENV:AWS_SECRET_ACCESS_KEY}
+      s3.path-style-access=true
+
