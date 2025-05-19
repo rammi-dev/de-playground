@@ -43,7 +43,7 @@ This repository contains a Helm chart for deploying MinIO, a high-performance, S
    Navigate to the directory containing this chart and run:
    ```
    helm dependency build
-   helm install minio . -f values.yaml --namespace minio --create-namespace
+   helm install minio . -f values.yaml --namespace minio-multi --create-namespace
    ```
 
 3. **Accessing MinIO**:
@@ -51,8 +51,7 @@ This repository contains a Helm chart for deploying MinIO, a high-performance, S
 
    You can port-forward to access the MinIO UI:
    ```
-   k port-forward -n minio svc/minio 9001
-:9001
+   k port-forward -n minio-multi svc/minio-minio-multidrive 9001:9001
    ```
 
    Open your browser and go to `http://localhost:9000` to access the MinIO web interface.

@@ -1,0 +1,3 @@
+PostgreSQL for filedr has been deployed.
+Check the service with:
+kubectl get svc --namespace {{ .Release.Namespace }}

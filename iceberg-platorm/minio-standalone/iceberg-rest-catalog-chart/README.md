@@ -1,6 +1,7 @@
 # Iceberg Rest Catalog Helm Chart
 
 This Helm chart deploys the Iceberg Rest Catalog along with its dependencies, such as PostgreSQL and Trino.
+The assumption is that minio is up and running
 
 ## Prerequisites
 - [Helm](https://helm.sh/docs/intro/install/) installed on your system.

@@ -1,0 +1,33 @@
+postgresql:
+  enabled: true
+
+  auth:
+    username: user
+    password: password
+    database: spark-iceberg
+    postgresPassword: postgres-password
+    enablePostgresUser: true
+
+  architecture: standalone
+  primary:
+    persistence:
+      enabled: false
+    initdb:
+      scripts:
+        create-nextdb.sql: |
+          CREATE DATABASE dummy2;
+          CREATE USER dummy2_user WITH ENCRYPTED PASSWORD 'dummy2-password';
+          GRANT ALL PRIVILEGES ON DATABASE dummy2 TO dummy2_user;
+          CREATE DATABASE dummy1;
+          CREATE USER dummy1_user WITH ENCRYPTED PASSWORD 'dummy1-password';
+          GRANT ALL PRIVILEGES ON DATABASE dummy1 TO dummy1_user;
+  metrics:
+    enabled: false
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+      

@@ -1,0 +1,62 @@
+---
+minio-multidrive:
+  enabled: true
+  mode: "distributed"
+  namespaceOverride: minio-multi
+  # mode: "standalone"
+  extraEnvVars:
+  - name: MINIO_AUDIT_LOGGER_FS_ENABLE
+    value: "on"
+  - name: MINIO_AUDIT_LOGGER_FS_TARGET
+    value: "/bitnami/minio/logs/audit"
+  auth:
+    rootUser: admin
+    rootPassword: admin-password
+
+  persistence:
+    enabled: true
+    size: 2Gi
+  resources:
+    requests:
+      memory: 4Gi
+      cpu: 1
+    limits:
+      cpu: 4
+      memory: 4Gi
+  provisioning:
+    enabled: true
+    buckets:
+      - name: data-bucket-default
+      - name: bucket-iceberg-spark
+    policies:
+      - name: data-bucket-default-full-access
+        statements:
+          - resources:
+              - "arn:aws:s3:::data-bucket-default/*"
+              - "arn:aws:s3:::data-bucket-default"
+            actions:
+              - "s3:*"
+            effect: "Allow"
+      - name: bucket-iceberg-spark-full-access
+        statements:
+          - resources:
+              - "arn:aws:s3:::bucket-iceberg-spark/*"
+              - "arn:aws:s3:::bucket-iceberg-spark"
+            actions:
+              - "s3:*"
+            effect: "Allow"
+
+    users:
+      - username: data-bucket-default-full
+        password: password
+        disabled: false
+        setPolicies: true
+        policies:
+          - data-bucket-default-full-access
+      - username: bucket-iceberg-spark-full
+        password: password
+        disabled: false
+        setPolicies: true
+        policies:
+          - bucket-iceberg-spark-full-access
+
