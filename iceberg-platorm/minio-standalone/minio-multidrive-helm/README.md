@@ -42,6 +42,7 @@ This repository contains a Helm chart for deploying MinIO, a high-performance, S
 2. **Install the MinIO Chart**:
    Navigate to the directory containing this chart and run:
    ```
+   helm dependency update
    helm dependency build
    helm install minio . -f values.yaml --namespace minio-multi --create-namespace
    ```
